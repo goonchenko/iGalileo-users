@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ListController!{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+
+                {% if app.user != null %}
+                <div class="card bg-light mb-3 mt-3">
+                    <div class="card-body">
+                            Jste přihlášeni jako <span class="highlight">{{ app.user.username }}</span>
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="card bg-light mb-3 mt-3">
+                    <div class="card-body">
+                        {% if app.user != null %}
+                            <div class="card-header"><h4>{{ lorem_ipsum }}:</h4></div>
+                            <div style="margin-top: 15px;">
+                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vestibulum erat nulla, ullamcorper nec, rutrum non, nonummy ac, erat. Nam sed tellus id magna elementum tincidunt. Sed convallis magna eu sem. Nullam dapibus fermentum ipsum. Curabitur vitae diam non enim vestibulum interdum. Etiam egestas wisi a erat. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Mauris suscipit, ligula sit amet pharetra semper, nibh ante cursus purus, vel sagittis velit mauris vel metus. Maecenas lorem. Etiam egestas wisi a erat.</p>
+                                <p>Mauris metus. Aliquam erat volutpat. Fusce consectetuer risus a nunc. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Morbi leo mi, nonummy eget tristique non, rhoncus non leo. Nunc tincidunt ante vitae massa. Nullam at arcu a est sollicitudin euismod. Nullam rhoncus aliquam metus. Praesent vitae arcu tempor neque lacinia pretium. Nulla accumsan, elit sit amet varius semper, nulla mauris mollis quam, tempor suscipit diam nulla vel leo. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Nullam at arcu a est sollicitudin euismod. In laoreet, magna id viverra tincidunt, sem odio bibendum justo, vel imperdiet sapien wisi sed libero.</p>
+                                <p>Duis ante orci, molestie vitae vehicula venenatis, tincidunt ac pede. Etiam egestas wisi a erat. Curabitur bibendum justo non orci. In convallis. In enim a arcu imperdiet malesuada. Fusce dui leo, imperdiet in, aliquam sit amet, feugiat eu, orci. Nulla non lectus sed nisl molestie malesuada. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. Ut tempus purus at lorem. Integer imperdiet lectus quis justo. Fusce consectetuer risus a nunc. Morbi imperdiet, mauris ac auctor dictum, nisl ligula egestas nulla, et sollicitudin sem purus in lacus. Phasellus rhoncus. Etiam neque. Vestibulum erat nulla, ullamcorper nec, rutrum non, nonummy ac, erat.</p>
+                                <p>Etiam commodo dui eget wisi. Nunc dapibus tortor vel mi dapibus sollicitudin. Etiam ligula pede, sagittis quis, interdum ultricies, scelerisque eu. Integer lacinia. Aenean fermentum risus id tortor. Aliquam erat volutpat. Aliquam erat volutpat. Integer lacinia. Sed convallis magna eu sem. Nulla non lectus sed nisl molestie malesuada. Suspendisse nisl. Donec vitae arcu.</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% if app.user == null %}
+                    <a href="{{ path('app_login') }}" class="btn btn-danger btn-block">Chcete-li zobrazit tuto stránku, musíte se přihlásit</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

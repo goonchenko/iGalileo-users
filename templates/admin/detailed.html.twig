@@ -1,0 +1,118 @@
+{% extends 'admin/index.html.twig' %}
+
+
+{% block sprava_body %}
+
+    <style>
+        :root {
+            --scrollbarBg: rgba(206, 212, 218, 1);
+            --scrollbarThumb: rgba(255, 255, 255, 0.8);
+            --scrollbarWidth: 10px;
+            --scrollbarBorder: 3px solid var(--scrollbarBg);
+            /*--scrollbarBorderRadius: calc(var(--scrollbarWidth) / 2);*/
+        }
+        .container {
+            scrollbar-width: var(--scrollbarWidth);
+            scrollbar-color: var(--scrollbarThumb) var(--scrollbarBg);
+        }
+        .container::-webkit-scrollbar {
+            width: var(--scrollbarWidth);
+        }
+        .container::-webkit-scrollbar-track {
+            background: var(--scrollbarBg);
+            /*border-radius: var(--scrollbarBorderRadius);*/
+        }
+        .container::-webkit-scrollbar-thumb {
+            background-color: var(--scrollbarThumb);
+            /*border-radius: var(--scrollbarBorderRadius);*/
+            border: var(--scrollbarBorder);
+        }
+
+        label {
+            margin-bottom: 0.15rem;
+        }
+    </style>
+
+    <div class="card bg-light mb-3 mt-3">
+        <div class="card-body">
+
+            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <h4>Správa uživatelů</h4>
+                <a href="{{ path('admin_list') }}" class="btn btn-light">Zpět</a>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="inputFirstname">Jméno</label>
+                        <input type="text" value="{{ user.firstname }}" name="firstname" id="inputFirstname" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputLastname">Příjmení</label>
+                        <input type="text" value="{{ user.lastname }}" name="lastname" id="inputLastname" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail">Email</label>
+                        <input type="text" value="{{ user.email }}" name="email" id="inputEmail" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputRoles">Seznam rolí</label>
+                        <input type="text" value="{{ user.getRoles|join(', ') }}" name="roles" id="inputRoles" class="form-control">
+                    </div>
+
+                    <div class="row" style="margin-top:21px;">
+                        <div class="col">
+                            <div class="form-control" style="display: flex; align-items: center;">
+                                <input  type="checkbox"
+                                        style="margin-top: 2px;"
+                                        onchange="changeStat(this, {{ user.id }}, 'access')"
+                                        {% if user.access > 0 %}
+                                            checked
+                                        {% endif %}
+                                >
+                                <div style="margin-left:7px">Přístup</div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-control" style="display: flex; align-items: center;">
+                                <input  type="checkbox"
+                                        style="margin-top: 2px;"
+                                        onchange="changeStat(this, {{ user.id }}, 'status')"
+                                        {% if user.status > 0 %}
+                                            checked
+                                        {% endif %}
+                                >
+                                <div style="margin-left:7px">Stav účtu</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        Logs<br>
+                        {% if logs != null %}
+                            <div class="form-control container" style="margin-top:3px; height:338px; overflow-y: scroll;">
+                                <table class="table table-sm" style="margin-top:10px;">
+                                    <tr>
+                                        <th>Datum</th>
+                                        <th>IP adresa</th>
+                                    </tr>
+                                    {% for log in logs %}
+                                        <tr>
+                                            <td>{{ log.date|date('Y-m-d H:i:s') }}</td>
+                                            <td>{{ log.ip }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <a href="#" class="btn btn-light btn-block">Uložit změny</a>
+
+        </div>
+    </div>
+{% endblock %}
